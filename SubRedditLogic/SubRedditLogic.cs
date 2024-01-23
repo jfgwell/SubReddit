@@ -17,26 +17,58 @@ namespace SubRedditLogic
 
         public SubRedditLogic(ILogger<SubRedditLogic> _logger)
         {
-            //using ILoggerFactory factory = LoggerFactory.Create(builder => builder.AddConsole());
-            //ILogger logger = factory.CreateLogger("Program");
 
-            this.logger = _logger;
+
+
+            //this.logger = _logger;
+
+            var loggerFactory = LoggerFactory.Create(
+           builder => builder
+                       // add console as logging target
+                       .AddConsole()
+                       // add debug output as logging target
+                       .AddDebug()
+                       // set minimum level to log
+                       .SetMinimumLevel(LogLevel.Debug)
+       );
+
+            // create a logger
+            var logger = loggerFactory.CreateLogger<SubRedditLogic>();
         }
         public void Setup()
         {
-            reddit = new RedditClient("_gPgpfkDiWqwtvBnVoUUEA", null, null, "eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzA1ODc1MDE4LjI0NDcyOSwiaWF0IjoxNzA1Nzg4NjE4LjI0NDcyOSwianRpIjoicUN3SXNwalRpRGFJazJxbHVtM1NTZG1VelF5M1Z3IiwiY2lkIjoiX2dQZ3Bma0RpV3F3dHZCblZvVVVFQSIsImxpZCI6InQyX2tta2o0ZHVuZyIsImFpZCI6InQyX2tta2o0ZHVuZyIsImxjYSI6MTY5NTg2NjE2ODk2NSwic2NwIjoiZUp5S1Z0SlNpZ1VFQUFEX193TnpBU2MiLCJmbG8iOjl9.TdyQWQlxqS48MUjHJJsxRBh25y0coeueIlfPTJeNahIbvLPb4YxGpSAkNKQCfFKAK3LW5_qLQUu0kHfvj3jK1V57b7SBeU62Em24zWB9wWrSR0OtLy4AOiqSZsq2EeHbsZ2IjeLpXQdD2Hjv0NqoGP9sAsvwJZ8QHRuCHDfK0UE0R1TsIt7nZ1eVE6yaaclktvhccTGftfQ7RXmK5Ozdtf5td3KaAl3qGArsqRCsWFntuBHS3Gm1-hmSy1M5x98TxlFho42P56r2VYXg7wfKxlVMwmHhxlQ7O96VeFgYuSOlT18R0txm_cGxV1ZQsE_w2CBuTiACi02TnW9tE5p0vg", null);
-            subreddits = reddit.Account.MySubscribedSubreddits();
-            toppostsofalltime = subreddits[0].Posts.GetTop("all");
+            try
+            {
+                //reddit = new RedditClient("_gPgpfkDiWqwtvBnVoUUEA", null, null, "eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzA2MDUyMTcyLjUxMTMsImlhdCI6MTcwNTk2NTc3Mi41MTEyOTksImp0aSI6InNsQy1DOXJsZXZvdTlHN3E0dGRTVW8taWFQeFdIQSIsImNpZCI6Il9nUGdwZmtEaVdxd3R2Qm5Wb1VVRUEiLCJsaWQiOiJ0Ml9rbWtqNGR1bmciLCJhaWQiOiJ0Ml9rbWtqNGR1bmciLCJsY2EiOjE2OTU4NjYxNjg5NjUsInNjcCI6ImVKeUtWdEpTaWdVRUFBRF9fd056QVNjIiwiZmxvIjo5fQ.anXUnrB-gpXT-HZH0c0TRWvZzrkH8aW6dgbzZw7fVclaJnnzKJ5ZYso1QzOl5vesE8f8ms6J-lnCybTUj3Q3PiEexmbw6QLlepAp5-PZrJq803kpnmvSg7GN_guj8VpTSbJ6zDPYvGK-fuNDrOx7aHchGkvWGnt8Rs3_pCdWbE95ysWguHLPKQSxcRpEYZbUhBRMa8PGByKEgEQB6x6BT2ZnA-gZ90tBj3tqgSYF08eWybMzgMP47ylUsQknEoKBr6kjODyIaP7TGhtX84vDQOiV_aDG953AYBupRyQ-TqZd1Dyhqi6bFyWmyxQPirxMdk-H3-TTG52hZ7sazpxNXA", null);
+
+                reddit = new RedditClient("_gPgpfkDiWqwtvBnVoUUEA", null, null, "yJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzA2MDUyMTcyLjUxMTMsImlhdCI6MTcwNTk2NTc3Mi41MTEyOTksImp0aSI6InNsQy1DOXJsZXZvdTlHN3E0dGRTVW8taWFQeFdIQSIsImNpZCI6Il9nUGdwZmtEaVdxd3R2Qm5Wb1VVRUEiLCJsaWQiOiJ0Ml9rbWtqNGR1bmciLCJhaWQiOiJ0Ml9rbWtqNGR1bmciLCJsY2EiOjE2OTU4NjYxNjg5NjUsInNjcCI6ImVKeUtWdEpTaWdVRUFBRF9fd056QVNjIiwiZmxvIjo5fQ.anXUnrB-gpXT-HZH0c0TRWvZzrkH8aW6dgbzZw7fVclaJnnzKJ5ZYso1QzOl5vesE8f8ms6J-lnCybTUj3Q3PiEexmbw6QLlepAp5-PZrJq803kpnmvSg7GN_guj8VpTSbJ6zDPYvGK-fuNDrOx7aHchGkvWGnt8Rs3_pCdWbE95ysWguHLPKQSxcRpEYZbUhBRMa8PGByKEgEQB6x6BT2ZnA-gZ90tBj3tqgSYF08eWybMzgMP47ylUsQknEoKBr6kjODyIaP7TGhtX84vDQOiV_aDG953AYBupRyQ-TqZd1Dyhqi6bFyWmyxQPirxMdk-H3-TTG52hZ7sazpxNXA", null);
+
+                subreddits = reddit.Account.MySubscribedSubreddits();
+                toppostsofalltime = subreddits[0].Posts.GetTop("all");
+                //logger.LogDebug("Setup Complete");
+            }
+            catch (Exception ex)
+            {
+                logger.LogDebug(ex.Message);
+                
+            }
         }
 
 
         public void Process()
         {
-            Console.WriteLine(subreddits[0].Name);
+            try
+            {
+                Console.WriteLine(subreddits[0].Name);
 
-            Console.WriteLine(toppostsofalltime.First().UpVotes.ToString());
+                Console.WriteLine(toppostsofalltime.First().UpVotes.ToString());
 
-            Console.WriteLine(subreddits[0].Posts.GetTop("all").First().Author);
+                Console.WriteLine(subreddits[0].Posts.GetTop("all").First().Author);
+            }
+            catch (Exception ex)
+            {
+                logger.LogDebug(ex.Message);
+            }
         }
     }
 }

@@ -7,33 +7,64 @@ namespace SubRedditLogic
     {
         private static System.Timers.Timer timer;
         private static SubRedditLogic redditLogic;
-        private readonly ILogger<Interval> logger;
+        private readonly ILogger logger;
         private readonly ILogger<SubRedditLogic> subredditlogger;
         IServiceProvider provider = null;
 
-        public Interval(ILogger<Interval> _logger)
+        public Interval()
         {
-            logger = _logger;
+            //logger = _logger;
 
             provider = new ServiceCollection()
                 .AddTransient<ISubRedditLogic, SubRedditLogic>()
                 .BuildServiceProvider();
+
+
+        //    var loggerFactory = LoggerFactory.Create(
+        //    builder => builder
+        //                // add console as logging target
+        //                .AddConsole()
+        //                // add debug output as logging target
+        //                .AddDebug()
+        //                // set minimum level to log
+        //                .SetMinimumLevel(LogLevel.Debug)
+        //);
+
+        //    // create a logger
+        //    var logger = loggerFactory.CreateLogger<Interval>();
+
+
         }
 
-        public Interval()
-        { }
-        public void Setup()
-        {
+        //public Interval()
+        //{
             
 
-            redditLogic = new SubRedditLogic(subredditlogger);
-            redditLogic.Setup();
-
+        //}
+        public void Setup()
+        {
+            try
+            {
+                redditLogic = new SubRedditLogic(subredditlogger);
+                redditLogic.Setup();
+                
+            }
+            catch(Exception ex)
+            {
+                //logger.LogDebug(ex.Message);
+            }
 
         }
         public void Run()
         {
-            Timer timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            try
+            {
+                Timer timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            }
+            catch (Exception ex)
+            {
+               // logger.LogDebug(ex.Message);
+            }
 
 
             // Keep the program running
@@ -46,8 +77,14 @@ namespace SubRedditLogic
 
         private static void TimerCallback(object state)
         {
-            // Call the Process() method at the specified interval
-            redditLogic.Process();
+            try
+            {
+                redditLogic.Process();
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(ex.Message);
+            }
 
         }
     }

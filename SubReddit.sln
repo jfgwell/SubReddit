@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubReddit", "SubReddit\SubR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubRedditLogic", "SubRedditLogic\SubRedditLogic.csproj", "{3106E57C-E412-487C-8A6E-59028EE2CD2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubRedditTests", "SubRedditTests\SubRedditTests.csproj", "{16887471-8607-4719-9D56-001D2985EF31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3106E57C-E412-487C-8A6E-59028EE2CD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3106E57C-E412-487C-8A6E-59028EE2CD2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3106E57C-E412-487C-8A6E-59028EE2CD2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16887471-8607-4719-9D56-001D2985EF31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16887471-8607-4719-9D56-001D2985EF31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16887471-8607-4719-9D56-001D2985EF31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16887471-8607-4719-9D56-001D2985EF31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

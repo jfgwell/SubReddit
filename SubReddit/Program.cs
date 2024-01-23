@@ -1,5 +1,7 @@
 ﻿using SubRedditLogic;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Reddit.Controllers;
 
 namespace SubReddit
 {
@@ -12,13 +14,44 @@ namespace SubReddit
 
             var ServiceProvider = BuildServiceProvider();
 
-            
-            Interval I = new Interval();
-            I.Setup();
-            I.Run();
+            var loggerFactory = LoggerFactory.Create(
+            builder => builder
+                        // add console as logging target
+                        .AddConsole()
+                        // add debug output as logging target
+                        .AddDebug()
+                        // set minimum level to log
+                        .SetMinimumLevel(LogLevel.Debug)
+        );
 
-            //ServiceProvider.GetRequiredService<IInterval>().Setup();
-            //ServiceProvider.GetRequiredService<IInterval>().Run();
+            // create a logger
+            var logger = loggerFactory.CreateLogger<Program>();
+
+
+
+            // Interval I = new Interval();
+            // I.Setup();
+            // I.Run();
+            try
+            {
+                ServiceProvider.GetRequiredService<IInterval>().Setup();
+                logger.LogInformation("Setup Complete (Console)");
+            }
+            catch(Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
+
+            try
+            {
+                ServiceProvider.GetRequiredService<IInterval>().Run();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
 
         }
 
