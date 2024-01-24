@@ -29,9 +29,7 @@ namespace SubReddit
 
 
 
-            // Interval I = new Interval();
-            // I.Setup();
-            // I.Run();
+
             try
             {
                 ServiceProvider.GetRequiredService<IInterval>().Setup();
@@ -46,6 +44,8 @@ namespace SubReddit
             try
             {
                 ServiceProvider.GetRequiredService<IInterval>().Run();
+
+               
             }
             catch (Exception ex)
             {
@@ -54,6 +54,8 @@ namespace SubReddit
 
 
         }
+
+       
 
         private static IServiceProvider BuildServiceProvider()
         {

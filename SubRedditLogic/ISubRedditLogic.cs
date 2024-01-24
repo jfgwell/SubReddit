@@ -8,8 +8,8 @@ namespace SubRedditLogic
 {
     public interface ISubRedditLogic
     {
-        public void Setup();
+        public Result Setup();
 
-        public void Process();
+        public Result Process();
     }
 }
