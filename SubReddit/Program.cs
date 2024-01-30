@@ -1,13 +1,12 @@
-﻿using SubRedditLogic;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Reddit.Controllers;
-
-namespace SubReddit
+﻿namespace SubReddit
 {
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Reddit.Controllers;
+    using SubRedditLogic;
+
     internal class Program
     {
-        
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
@@ -44,15 +43,11 @@ namespace SubReddit
             try
             {
                 ServiceProvider.GetRequiredService<IInterval>().Run();
-
-               
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
             }
-
-
         }
 
        
@@ -62,7 +57,6 @@ namespace SubReddit
             return new ServiceCollection()
                 .AddTransient<IInterval,Interval>()
                 .BuildServiceProvider();
-
         }
     }
 }

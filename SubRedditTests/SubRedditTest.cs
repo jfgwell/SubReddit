@@ -1,25 +1,22 @@
-﻿using FakeItEasy;
-using Microsoft.Extensions.Logging;
-using Shouldly;
-using SubRedditLogic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SubRedditTests
+﻿namespace SubRedditTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using FakeItEasy;
+    using Microsoft.Extensions.Logging;
+    using Shouldly;
+    using SubRedditLogic;
+
     [TestClass]
     public class SubRedditTest
     {
-
-
         [TestMethod]
         public void RunTest()
         {
-
-            var subreddittest = new SubRedditLogic.SubRedditLogic();
+            var subreddittest = new SubRedditLogic();
 
             var result = subreddittest.Process();
 
@@ -28,7 +25,6 @@ namespace SubRedditTests
             Assert.IsNull(result.TopPosts);
             Assert.IsNull(result.TopPoster);
             Assert.IsNotNull(result.ErrorMessage);
-
         }
     }
 }
