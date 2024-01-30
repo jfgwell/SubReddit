@@ -1,13 +1,12 @@
-using Microsoft.Extensions.Logging.Abstractions;
-using SubRedditLogic;
-using Shouldly;
-
 namespace SubRedditTests
 {
+    using Microsoft.Extensions.Logging.Abstractions;
+    using Shouldly;
+    using SubRedditLogic;
+
     [TestClass]
     public class IntervalTest
     {
-
         [TestMethod]
         public void Setup_Should_Not_Throw_Exception()
         {
@@ -17,6 +16,5 @@ namespace SubRedditTests
             // Act & Assert
             Should.NotThrow(() => interval.Setup());
         }
-
     }
 }
