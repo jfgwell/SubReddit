@@ -34,7 +34,7 @@
                 ServiceProvider.GetRequiredService<IInterval>().Setup();
                 logger.LogInformation("Setup Complete (Console)");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogError(ex.Message);
             }

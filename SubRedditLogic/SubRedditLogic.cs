@@ -65,7 +65,7 @@
             {
                 this.result.SubRedditName = this.subreddits[0].Name;
                 this.result.TopPosts = this.toppostsofalltime.First().UpVotes.ToString();
-                this.result.TopPoster = this.subreddits[0].Posts.GetTop("all").First().Author;
+                this.result.TopPoster = this.toppostsofalltime.First().Author;//this.subreddits[0].Posts.GetTop("all").First().Author;
                 return this.result;
             }
             catch (Exception ex)
