@@ -9,7 +9,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            // Console.WriteLine("Hello, World!");
 
             var ServiceProvider = BuildServiceProvider();
 
@@ -26,15 +26,16 @@
             // create a logger
             var logger = loggerFactory.CreateLogger<Program>();
 
-
+            IInterval? interval = null;
 
 
             try
             {
-                ServiceProvider.GetRequiredService<IInterval>().Setup();
+                interval = ServiceProvider.GetRequiredService<IInterval>();
+                interval.PreSetup();
                 logger.LogInformation("Setup Complete (Console)");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogError(ex.Message);
             }
@@ -42,7 +43,7 @@
 
             try
             {
-                ServiceProvider.GetRequiredService<IInterval>().Run();
+                interval.Run();
             }
             catch (Exception ex)
             {

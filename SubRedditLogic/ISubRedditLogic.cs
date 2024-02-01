@@ -8,7 +8,7 @@
 
     public interface ISubRedditLogic
     {
-        public Result Setup();
+        public Result Setup(int choice);
 
         public Result Process();
     }

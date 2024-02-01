@@ -20,6 +20,7 @@
         private readonly string accessToken;
         private readonly string appID;
         private readonly Result? result = null;
+        private int choice = 0;
 
         public SubRedditLogic()
         {
@@ -34,18 +35,31 @@
         }
 
         /// <summary>
+        /// Initializes RedditClient object and gets a lits of subreddits the user can choose from their acccount
+        /// </summary>
+        /// <returns></returns>
+        public Result PreSetup()
+        {
+            this.reddit = new RedditClient(this.appID, null, null, this.accessToken, null);
+
+            this.subreddits = this.reddit.Account.MySubscribedSubreddits();
+
+            result.Subreddits = this.subreddits;
+
+            return result;
+        }
+
+        /// <summary>
         /// Initializes the subreddit class.
         /// </summary>
         /// <returns>Result object.</returns>
-        public Result Setup()
+        public Result Setup(int choice)
         {
             try
             {
-                 this.reddit = new RedditClient(this.appID, null, null, this.accessToken, null);
-
-                 this.subreddits = this.reddit.Account.MySubscribedSubreddits();
-                 this.toppostsofalltime = this.subreddits[0].Posts.GetTop("all");
+                 this.toppostsofalltime = this.subreddits[choice].Posts.GetTop("all");
                  this.result.ErrorMessage = "Success";
+                 this.choice = choice;
                  return this.result;
             }
             catch (Exception ex)
@@ -63,9 +77,9 @@
         {
             try
             {
-                this.result.SubRedditName = this.subreddits[0].Name;
+                this.result.SubRedditName = this.subreddits[this.choice].Name;
                 this.result.TopPosts = this.toppostsofalltime.First().UpVotes.ToString();
-                this.result.TopPoster = this.subreddits[0].Posts.GetTop("all").First().Author;
+                this.result.TopPoster = this.toppostsofalltime.First().Author;
                 return this.result;
             }
             catch (Exception ex)

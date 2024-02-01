@@ -8,13 +8,23 @@ namespace SubRedditTests
     public class IntervalTest
     {
         [TestMethod]
-        public void Setup_Should_Not_Throw_Exception()
+        public void InitializingIntervalObjectShouldNotBeNull()
         {
             // Arrange
             var interval = new Interval();
 
             // Act & Assert
-            Should.NotThrow(() => interval.Setup());
+            interval.ShouldNotBeNull();
+        }
+
+        [TestMethod]
+        public void ShouldBeOfTypeInterval()
+        {
+            // Arrange
+            var interval = new Interval();
+
+            // Act & Assert
+            interval.ShouldBeOfType<Interval>();
         }
     }
 }

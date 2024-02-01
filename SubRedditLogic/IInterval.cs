@@ -8,7 +8,8 @@
 
     public interface IInterval
     {
-        void Setup();
+        void PreSetup();
+        void Setup(int choice);
         void Run();
     }
 }
